@@ -1,8 +1,5 @@
 {
-  "dependencies": {
-    "canvas": "^2.11.2"
-  },
   "engines": {
-    "node": "18.x"
+    "node": "24.x"
   }
 }
