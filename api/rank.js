@@ -1,5 +1,3 @@
-import { createCanvas, loadImage } from "canvas";
-
 export default async function handler(req, res) {
   const { titulo = "Ranking", nomes = "", valores = "", avatares = "" } = req.query;
 
@@ -7,34 +5,32 @@ export default async function handler(req, res) {
   const valoresArr = valores.split(",");
   const avataresArr = avatares.split(",");
 
-  const canvas = createCanvas(800, 400);
-  const ctx = canvas.getContext("2d");
-
-  ctx.fillStyle = "#111";
-  ctx.fillRect(0, 0, 800, 400);
-
-  ctx.fillStyle = "#fff";
-  ctx.font = "30px Arial";
-  ctx.fillText(titulo, 20, 40);
+  let html = `
+  <html>
+  <head>
+  <style>
+    body { background:#111; color:#fff; font-family:Arial; }
+    .card { display:flex; align-items:center; margin:10px; padding:10px; background:#222; border-radius:10px; }
+    img { width:40px; height:40px; border-radius:50%; margin-right:10px; }
+  </style>
+  </head>
+  <body>
+  <h1>${titulo}</h1>
+  `;
 
   for (let i = 0; i < 5; i++) {
-    const y = 80 + i * 60;
-
-    ctx.fillStyle = "#222";
-    ctx.fillRect(20, y - 30, 760, 50);
-
-    ctx.fillStyle = "#fff";
-    ctx.fillText(`#${i + 1}`, 30, y);
-
-    try {
-      const avatar = await loadImage(avataresArr[i]);
-      ctx.drawImage(avatar, 80, y - 25, 40, 40);
-    } catch {}
-
-    ctx.fillText(nomesArr[i] || "User", 140, y);
-    ctx.fillText(valoresArr[i] || "0", 650, y);
+    html += `
+    <div class="card">
+      <span>#${i + 1}</span>
+      <img src="${avataresArr[i] || ""}">
+      <span>${nomesArr[i] || "User"}</span>
+      <span style="margin-left:auto">${valoresArr[i] || "0"}</span>
+    </div>
+    `;
   }
 
-  res.setHeader("Content-Type", "image/png");
-  res.send(canvas.toBuffer());
+  html += `</body></html>`;
+
+  res.setHeader("Content-Type", "text/html");
+  res.send(html);
 }
