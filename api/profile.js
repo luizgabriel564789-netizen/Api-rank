@@ -10,7 +10,6 @@ export default async function handler(req, res) {
     const canvas = createCanvas(800, 300)
     const ctx = canvas.getContext('2d')
 
-    // 🎨 fundo
     let background
     try {
       if (fundo === '1') {
@@ -26,7 +25,6 @@ export default async function handler(req, res) {
 
     ctx.drawImage(background, 0, 0, 800, 300)
 
-    // 🧑 avatar (NUNCA QUEBRA)
     let avatar
     try {
       avatar = await loadImage(avatarUrl)
@@ -42,12 +40,10 @@ export default async function handler(req, res) {
     ctx.drawImage(avatar, 40, 90, 120, 120)
     ctx.restore()
 
-    // 👤 nome
     ctx.fillStyle = '#ffffff'
     ctx.font = '28px sans-serif'
     ctx.fillText(nome, 200, 130)
 
-    // 💰 dinheiro
     ctx.fillStyle = '#00ff88'
     ctx.font = '22px sans-serif'
     ctx.fillText(`💰 ${dinheiro} reais`, 200, 180)
