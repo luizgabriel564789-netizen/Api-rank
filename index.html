@@ -1,17 +1,47 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <title>FoxBank</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<title>FoxBank</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="card">
-  <input id="userId" placeholder="Digite o ID">
-  <button onclick="buscar()">Buscar</button>
+<div class="top">
+  <input placeholder="Pesquisar..." id="search">
+</div>
 
-  <div id="perfil"></div>
+<div class="menu">
+  <button onclick="aba('comandos')">📜 Comandos</button>
+  <button onclick="aba('info')">ℹ️ Informações</button>
+</div>
+
+<div class="content">
+
+  <div id="home" class="box">
+    <img src="https://cdn.discordapp.com/embed/avatars/0.png" class="bot">
+    <h2>FoxBank Bot</h2>
+    <p>Clique nas abas acima</p>
+  </div>
+
+  <div id="comandos" class="box hidden">
+    <h2>📜 Comandos</h2>
+
+    <div class="cmd">/saldo → ver dinheiro</div>
+    <div class="cmd">/depositar → guardar dinheiro</div>
+    <div class="cmd">/sacar → retirar dinheiro</div>
+    <div class="cmd">/emprestimo → pegar dinheiro</div>
+    <div class="cmd">/foxbank → ver dívida</div>
+    <div class="cmd">/perfil → ver perfil</div>
+
+  </div>
+
+  <div id="info" class="box hidden">
+    <h2>ℹ️ Informações</h2>
+    <p>Bot econômico estilo banco 💰</p>
+    <p>Com sistema de empréstimo, juros e ranking</p>
+  </div>
+
 </div>
 
 <script src="script.js"></script>
